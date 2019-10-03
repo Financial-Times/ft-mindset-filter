@@ -1,4 +1,5 @@
 chrome.runtime.onInstalled.addListener(function() {
+	chrome.storage.sync.set({ isFiltered: false });
 	chrome.storage.sync.set({ text: 'brexit' }, function() {
 		console.log('The color is green.');
 	});
