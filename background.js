@@ -7,7 +7,7 @@ chrome.runtime.onInstalled.addListener(function() {
 			{
 				conditions: [
 					new chrome.declarativeContent.PageStateMatcher({
-						pageUrl: { hostEquals: 'ft.com' },
+						pageUrl: { hostEquals: 'www.ft.com' },
 					}),
 				],
 				actions: [new chrome.declarativeContent.ShowPageAction()],
