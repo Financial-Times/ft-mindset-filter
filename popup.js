@@ -3,12 +3,18 @@ let changeColor = document.getElementById('changeColor');
 chrome.storage.sync.get('text', function(data) {
 	changeColor.innerHTML = data.text;
 	changeColor.setAttribute('value', data.text);
+	let selectedOption = data.text;
+	console.log(selectedOption);
+
+	if (selectedOption === 'Brexit') {
+		console.log('let us eat breakfast');
+	}
 });
 
 let toggleFilter = document.getElementById('filter-toggle');
 let toggleFilterLabel = document.getElementById('filter-toggle-label');
 
-function filter() {
+function filter(selectedOption) {
 	const teaserBlurredStyle = 'filter: blur(10px); pointer-events: none';
 	const overlayInitialStyle =
 		'position: absolute; top: 0; left: 0; height: 100%; width: 100%; display: flex; flex-direction: column; justify-content: center;';
@@ -16,6 +22,7 @@ function filter() {
 	chrome.storage.sync.get('isFiltered', function(data) {
 		if (!data.isFiltered) {
 			chrome.storage.sync.set({ isFiltered: true });
+
 			document.querySelectorAll('.o-teaser').forEach(function(el) {
 				let topNode = el;
 				const tag = topNode.querySelector('.o-teaser__tag');
@@ -26,7 +33,7 @@ function filter() {
 						.getAttribute('aria-label')
 						.split('Category:')[1]
 						.trim();
-					if (label === 'Brexit') {
+					if (label === selectedOption) {
 						const isVideoPlayer = topNode
 							.getAttribute('class')
 							.includes('o-teaser--now-playing');
@@ -119,9 +126,15 @@ toggleFilter.onclick = function(element) {
 changeColor.onclick = function(element) {
 	let color = element.target.value;
 
-	chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
-		chrome.tabs.executeScript(tabs[0].id, {
-			code: String(filter) + 'filter();',
-		});
+	chrome.storage.sync.get('text', function(data) {
+		let selectedOption = data.text;
+		console.log(selectedOption);
+		if (selectedOption === 'Brexit') {
+			chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+				chrome.tabs.executeScript(tabs[0].id, {
+					code: String(filter) + `filter(${selectedOption})`,
+				});
+			});
+		}
 	});
 };
