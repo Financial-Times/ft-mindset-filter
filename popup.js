@@ -55,7 +55,7 @@ function filter() {
 						const overlayButton = document.createElement('button');
 						overlayButton.innerHTML = 'Reveal';
 						overlayButton.style =
-							'position: absolute; top: 0; right: 0; border: none; padding: 5px 8px;';
+							'position: absolute; top: 0; right: 0; border: none; padding: 5px 8px; z-index: 1;';
 						overlay.appendChild(overlayButton);
 
 						overlay.style = overlayInitialStyle;
