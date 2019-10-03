@@ -1,24 +1,51 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="https://www.ft.com/__origami/service/build/v2/bundles/css?modules=o-grid@^4.5.3,o-colors@^4.10.2,o-typography@^5.12.0,o-table@^7.4.0"/>
+    <link
+      rel="stylesheet"
+      href="https://www.ft.com/__origami/service/build/v2/bundles/css?modules=o-grid@^4.5.3,o-colors@^4.10.2,o-typography@^5.12.0,o-table@^7.4.0,o-forms@^7.1.1"
+    />
     <style>
       html {
-      background-color: #fff1e5;
-      color: #000;
+        background-color: #fff1e5;
+        color: #000;
       }
       button {
-      background-size: 40px 40px;
-      min-height: 40px;
-      min-width: 80px;
-      padding: 11px 20px 11px 20px;
-      font-size: 16px;
-      line-height: 16px;
-      border-width: 1px;
+        background-size: 40px 40px;
+        min-height: 40px;
+        min-width: 80px;
+        padding: 11px 20px 11px 20px;
+        font-size: 16px;
+        line-height: 16px;
+        border-width: 1px;
       }
-      </style>
+    </style>
   </head>
   <body>
+    <div class="o-forms-field">
+      <span class="o-forms-title">
+        <span class="o-forms-title__main" id="toggle-group-title"
+          >Toggle filters</span
+        >
+      </span>
+      <span class="o-forms-input o-forms-input--toggle">
+        <label>
+          <input
+            type="checkbox"
+            name="default"
+            value="Filter toggle"
+            aria-label="Filter toggle"
+            id="filter-toggle"
+          />
+          <span
+            class="o-forms-input__label"
+            aria-hidden="true"
+            id="filter-toggle-label"
+            >OFF</span
+          >
+        </label>
+      </span>
+    </div>
     <button id="changeColor" class="o-buttons o-buttons--big"></button>
     <script src="popup.js"></script>
   </body>
