@@ -126,7 +126,7 @@ changeColor.onclick = function(element) {
 		if (selectedOption === 'Brexit') {
 			chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
 				chrome.tabs.executeScript(tabs[0].id, {
-					code: String(filter) + `filter(${selectedOption})`,
+					code: String(filter) + `filter('${selectedOption}')`,
 				});
 			});
 		}
