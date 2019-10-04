@@ -1,14 +1,20 @@
 let filterList = document.getElementById("filterList");
 let info = document.getElementById("info");
 let optionsEl = document.getElementById("openOptions");
+let toggleFilter = document.getElementById("filter-toggle");
+let toggleFilterLabel = document.getElementById("filter-toggle-label");
 
 chrome.storage.sync.get("text", function(data) {
   filterList.innerHTML = data.text.join(", ");
   filterList.setAttribute("value", data.text);
 });
 
-let toggleFilter = document.getElementById("filter-toggle");
-let toggleFilterLabel = document.getElementById("filter-toggle-label");
+chrome.storage.sync.get("isFiltered", function(data) {
+  document.getElementById("filter-toggle").checked = data.isFiltered;
+  document.getElementById("filter-toggle-label").innerHTML = data.isFiltered
+    ? "ON"
+    : "OFF";
+});
 
 function filter(selectedOptions) {
   const teaserBlurredStyle = "filter: blur(10px); pointer-events: none";
