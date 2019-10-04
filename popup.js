@@ -1,5 +1,6 @@
 let filterList = document.getElementById("filterList");
 let info = document.getElementById("info");
+let optionsEl = document.getElementById("openOptions");
 
 chrome.storage.sync.get("text", function(data) {
   filterList.innerHTML = data.text.join(", ");
@@ -153,4 +154,9 @@ toggleFilter.onclick = function(element) {
       });
     });
   });
+};
+
+optionsEl.onclick = function() {
+  console.log("hello");
+  chrome.tabs.create({ url: "/options.html" });
 };
