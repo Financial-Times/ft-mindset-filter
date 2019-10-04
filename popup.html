@@ -19,6 +19,18 @@
         line-height: 16px;
         border-width: 1px;
       }
+
+      .filter-title {
+        font-weight: 600;
+      }
+
+      .filter-container {
+        width: 120px;
+      }
+
+      .info {
+        margin-top: 5px;
+      }
     </style>
   </head>
   <body>
@@ -46,7 +58,11 @@
         </label>
       </span>
     </div>
-    <button id="changeColor" class="o-buttons o-buttons--big"></button>
+    <div class="filter-container">
+      <div class="filter-title">Terms to filter:</div>
+      <div id="filterList" class="filter-list"></div>
+    </div>
+    <div class="info" id="info"></div>
     <script src="popup.js"></script>
   </body>
 </html>
