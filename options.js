@@ -1,6 +1,6 @@
 let page = document.getElementById('buttonDiv');
 
-const kButtonColors = ['brexit', 'royals', 'suicide', 'random'];
+const kButtonColors = ['Brexit', 'royals', 'suicide', 'random'];
 
 function constructOptions(kButtonColors) {
 	for (let item of kButtonColors) {
@@ -8,8 +8,12 @@ function constructOptions(kButtonColors) {
 		button.innerHTML = item;
 		button.setAttribute('class', 'o-buttons o-buttons--big mg-16');
 		button.addEventListener('click', function() {
+			button.setAttribute(
+				'class',
+				'o-buttons o-buttons--primary o-buttons--big mg-16',
+			);
 			chrome.storage.sync.set({ text: item }, function() {
-				console.log('color is ' + item);
+				console.log('text is ' + item);
 			});
 		});
 		page.appendChild(button);
