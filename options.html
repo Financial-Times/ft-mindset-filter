@@ -1,25 +1,38 @@
 <!DOCTYPE html>
 <html>
   <head>
-      <link rel="stylesheet" href="https://www.ft.com/__origami/service/build/v2/bundles/css?modules=o-grid@^4.5.3,o-colors@^4.10.2,o-typography@^5.12.0,o-table@^7.4.0,o-buttons@^5.16.7"/>
+    <link
+      rel="stylesheet"
+      href="https://www.ft.com/__origami/service/build/v2/bundles/css?modules=o-grid@^4.5.3,o-colors@^4.10.2,o-typography@^5.12.0,o-table@^7.4.0,o-buttons@^5.16.7"
+    />
     <style>
       html {
-      background-color: #fff1e5;
-      color: #000;
+        background-color: #fff1e5;
+        color: #000;
       }
 
       .mg-16 {
         margin: 16px;
       }
 
+      #addNewForm {
+        margin-top: 10px;
+      }
+
+      input {
+        font-size: 18px;
+      }
     </style>
   </head>
   <body>
     <div>
       <h2 class="o-typography-heading-level-2">Choose something to filter</h2>
     </div>
-    <div id="buttonDiv">
-    </div>
+    <div id="buttonDiv"></div>
+    <form id="addNewForm">
+      <h4 class="o-typography-heading-level-4">Add new term</h4>
+      <input id="addNewInput" />
+    </form>
   </body>
   <script src="options.js"></script>
 </html>
