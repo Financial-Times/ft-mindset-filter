@@ -160,3 +160,9 @@ optionsEl.onclick = function() {
   console.log("hello");
   chrome.tabs.create({ url: "/options.html" });
 };
+
+chrome.storage.onChanged.addListener(function(changes, namespace) {
+  if (changes.total) {
+    info.innerHTML = `Currently hiding ${changes.total.newValue} articles`;
+  }
+});
