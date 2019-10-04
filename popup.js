@@ -3,12 +3,6 @@ let changeColor = document.getElementById('changeColor');
 chrome.storage.sync.get('text', function(data) {
 	changeColor.innerHTML = data.text;
 	changeColor.setAttribute('value', data.text);
-	let selectedOption = data.text;
-	console.log(selectedOption);
-
-	if (selectedOption === 'Brexit') {
-		console.log('let us eat breakfast');
-	}
 });
 
 let toggleFilter = document.getElementById('filter-toggle');
