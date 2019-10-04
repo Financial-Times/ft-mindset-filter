@@ -2,14 +2,14 @@ let filterList = document.getElementById("filterList");
 let info = document.getElementById("info");
 
 chrome.storage.sync.get("text", function(data) {
-  filterList.innerHTML = data.text;
+  filterList.innerHTML = data.text.join(", ");
   filterList.setAttribute("value", data.text);
 });
 
 let toggleFilter = document.getElementById("filter-toggle");
 let toggleFilterLabel = document.getElementById("filter-toggle-label");
 
-function filter(selectedOption) {
+function filter(selectedOptions) {
   const teaserBlurredStyle = "filter: blur(10px); pointer-events: none";
   const overlayInitialStyle =
     "position: absolute; top: 0; left: 0; height: 100%; width: 100%; display: flex; flex-direction: column; justify-content: center;";
@@ -31,19 +31,21 @@ function filter(selectedOption) {
           label = tag
             .getAttribute("aria-label")
             .split("Category:")[1]
-            .trim();
+            .trim()
+            .toLowerCase();
         }
 
         const titleNode = topNode.querySelector(".js-teaser-heading-link");
         const standfirstNode = topNode.querySelector(".o-teaser__standfirst");
-        const title = titleNode ? titleNode.innerHTML : "";
-
-        const standfirst = standfirstNode ? standfirstNode.innerHTML : "";
+        const title = titleNode ? titleNode.innerHTML.toLowerCase() : "";
+        const standfirst = standfirstNode
+          ? standfirstNode.innerHTML.toLowerCase()
+          : "";
 
         if (
-          label === selectedOption ||
-          title.includes(selectedOption) ||
-          standfirst.includes(selectedOption)
+          selectedOptions.includes(label) ||
+          selectedOptions.some(d => title.includes(d)) ||
+          selectedOptions.some(d => standfirst.includes(d))
         ) {
           total += 1;
 
@@ -139,11 +141,14 @@ toggleFilter.onclick = function(element) {
     });
 
     chrome.storage.sync.get("text", function(data) {
-      let selectedOption = data.text;
+      let selectedOptions = data.text;
+      let selectedOptionsString = `[${selectedOptions
+        .map(t => `"${t.toLowerCase()}"`)
+        .join(",")}]`;
 
       chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
         chrome.tabs.executeScript(tabs[0].id, {
-          code: String(filter) + `filter('${selectedOption}')`
+          code: String(filter) + `filter(${selectedOptionsString})`
         });
       });
     });
